@@ -6,6 +6,7 @@ use App\Common\Err\ApiErrDesc;
 use Exception;
 use App\Http\Response\ResponseJson;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Request;
 
 
 class Handler extends ExceptionHandler
@@ -45,10 +46,10 @@ class Handler extends ExceptionHandler
     }*/
     /**
      * @param \Illuminate\Http\Request $request
-     * @param \Exception $e
+     * @param \Exception $exception
      * @return \Illuminate\Http\Response
      */
-    /*public function render(Request $request, Exception $exception)
+    public function render($request, $exception)
     {
         //return parent::reader($request, $exception);
         if ($exception instanceof ApiException) {
@@ -62,5 +63,5 @@ class Handler extends ExceptionHandler
             $message = $exception->getMessage()?:ApiErrDesc::UNKNOWN_ERR[1];
         }
         return $this->jsonData($code, $message);
-    }*/
+    }
 }
