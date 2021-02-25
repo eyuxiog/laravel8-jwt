@@ -17,3 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+$api = app(\Dingo\Api\Routing\Router::class);
+$api->version('v1', function ($api) {
+    $api->get('test/info', [\App\Http\Controllers\Api\v1\TestController::class, 'info']);
+});
