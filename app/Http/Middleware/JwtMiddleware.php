@@ -21,7 +21,7 @@ class JwtMiddleware
 
     public function handle($request, Closure $next)
     {
-        $token = $request->input('token');
+        $token = $request->header('token');
         if ($token) {
             $jwtAuth = JwtAuth::getInstance();
             $jwtAuth->setToken($token);

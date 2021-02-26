@@ -43,6 +43,6 @@ trait ResponseJson
             'msg' => $message,
             'data' => $data,
         ];
-        return json_encode($content);
+        return response()->json($content);
     }
 }
