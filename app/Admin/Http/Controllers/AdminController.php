@@ -76,4 +76,9 @@ class AdminController extends Controller
     {
         //
     }
+
+    public function aja()
+    {
+        echo 3;
+    }
 }

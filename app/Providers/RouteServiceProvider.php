@@ -47,6 +47,15 @@ class RouteServiceProvider extends ServiceProvider
                 ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
         });
+
+        $sld_prefix = explode('.',$_SERVER['HTTP_HOST'])[0];
+        if(config('domain.admin_url') == $sld_prefix){
+            $this->mapAdminRoutes();
+        }elseif(config('domain.home_url') == $sld_prefix){
+            $this->mapHomeRoutes();
+        }elseif(config('domain.api_url') == $sld_prefix){
+            $this->mapApiRoutes();
+        }
     }
 
     /**
@@ -59,5 +68,38 @@ class RouteServiceProvider extends ServiceProvider
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60);
         });
+    }
+
+    /**
+     * Home
+     */
+    protected function mapHomeRoutes()
+    {
+        Route::domain(config('domain.home_url'))
+            ->middleware('web')
+            ->namespace('App\Home\Http\Controllers')
+            ->group(base_path('App/Home/Routes/web.php'));
+    }
+
+    /**
+     * Admin
+     */
+    protected function mapAdminRoutes()
+    {
+        Route::domain(config('domain.admin_url'))
+            ->middleware('web')
+            ->namespace('App\Admin\Http\Controllers')
+            ->group(base_path('App/Admin/Routes/web.php'));
+    }
+
+    /**
+     * Api
+     */
+    protected function mapApiRoutes()
+    {
+        Route::domain(config('domain.api_url'))
+            ->middleware('web')
+            ->namespace('App\Api\Http\Controllers')
+            ->group(base_path('App/Api/Routes/web.php'));
     }
 }

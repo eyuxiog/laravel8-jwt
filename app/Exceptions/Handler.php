@@ -62,6 +62,9 @@ class Handler extends ExceptionHandler
             }
             $message = $exception->getMessage()?:ApiErrDesc::UNKNOWN_ERR[1];
         }
-        return $this->jsonData($code, $message);
+        if (config('app.debug') == true) {
+            dump($exception);
+        }
+        return $this->jsonErrorData($code, $message);
     }
 }

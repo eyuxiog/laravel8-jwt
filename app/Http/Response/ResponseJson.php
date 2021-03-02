@@ -16,18 +16,18 @@ trait ResponseJson
      * @param array $data
      * @return false|string
      */
-    public function jsonData($code, $message, $data = [])
+    public function jsonErrorData($code, $message, $data = [], $httpCode = 500)
     {
-        return $this->jsonResponse($code, $message, $data);
+        return $this->jsonResponse($code, $message, $data, $httpCode);
     }
     /**
      * app接口请求成功时返回
      * @param array $data
      * @return false|string
      */
-    public function jsonSuccessData($data = [])
+    public function jsonSuccessData($data = [], $httpCode = 200)
     {
-        return $this->jsonResponse(0, 'success', $data);
+        return $this->jsonResponse(0, 'success', $data, $httpCode);
     }
     /**
      * 返回一个json
@@ -36,13 +36,13 @@ trait ResponseJson
      * @param $data
      * @return false|string
      */
-    private function jsonResponse($code, $message, $data)
+    private function jsonResponse($code, $message, $data, $httpCode = 200)
     {
         $content = [
             'code' => $code,
             'msg' => $message,
             'data' => $data,
         ];
-        return response()->json($content);
+        return response()->json($content, $httpCode);
     }
 }
