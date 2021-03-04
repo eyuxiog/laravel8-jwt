@@ -48,14 +48,14 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/web.php'));
         });
 
-        $sld_prefix = explode('.',$_SERVER['HTTP_HOST'])[0];
+        /*$sld_prefix = explode('.',$_SERVER['HTTP_HOST'])[0];
         if(config('domain.admin_url') == $sld_prefix){
             $this->mapAdminRoutes();
         }elseif(config('domain.home_url') == $sld_prefix){
             $this->mapHomeRoutes();
         }elseif(config('domain.api_url') == $sld_prefix){
             $this->mapApiRoutes();
-        }
+        }*/
     }
 
     /**
